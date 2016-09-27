@@ -18,8 +18,8 @@ class HtmlDownloader(object):
             print(e.info())
             print(e.read())
             return None
-        except:
-            print('get content error.')
+        except Exception as e:
+            print('exception:\nurl: %s\ntype: %r\nexcept: %r' % (new_url[2], type(e), e))
             return None
 
         if response.getcode() != 200:

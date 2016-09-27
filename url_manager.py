@@ -6,6 +6,23 @@ class UrlManager(object):
         self.base_url = 'https://zh.wikipedia.org/zh-cn/{month}%E6%9C%88{day}%E6%97%A5'
         self.urls = []
         
+        #first check error.txt file content, then generate before error url
+        filename = 'files/error.txt'
+        with open(filename, 'r') as f:
+            for data in f:
+                data = data.strip()
+                #print(data)
+                if data.find('-') > -1:
+                    date = data.split('-')
+                    self.urls.append((date[0], date[1], self.base_url.format(month = date[0], day = date[1])))
+
+        #truncate file
+        with open(filename, 'w') as f:
+            pass
+
+        if len(self.urls) > 0:
+            return
+
         for m in range(1, 13):
             for d in range(1, 32):
                 if m == 2 and d > 29:

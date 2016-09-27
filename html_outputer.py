@@ -49,8 +49,16 @@ class HtmlOutputer(object):
         with open(filename, mode = 'w', encoding = 'utf-8') as f:
             f.write(data[2])
 
+    def write_error(self, new_url):
+        filename = 'files/error.txt'
+        content = '{}-{}'.format(new_url[0], new_url[1])
+        print('generate %s file error.' % content)
+        with open(filename, 'a+', encoding = 'utf-8') as f:
+            f.write(content + '\n')
+
     def collect_data(self, new_url, new_data):
         if new_data is None:
+            self.write_error(new_url)
             return None
         print("month : %d ; day : %d ; url : %s" % new_url)
         month = new_url[0]

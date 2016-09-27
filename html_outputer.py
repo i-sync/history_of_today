@@ -60,7 +60,7 @@ class HtmlOutputer(object):
         if new_data is None:
             self.write_error(new_url)
             return None
-        print("month : %d ; day : %d ; url : %s" % new_url)
+        print("month : %s ; day : %s ; url : %s" % new_url)
         month = new_url[0]
         day = new_url[1]
         result = OutPutResult(month, day)

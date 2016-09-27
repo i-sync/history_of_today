@@ -18,7 +18,10 @@ class HtmlDownloader(object):
             print(e.info())
             print(e.read())
             return None
-            
+        except:
+            print('get content error.')
+            return None
+
         if response.getcode() != 200:
             return None
         return response.read()

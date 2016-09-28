@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 class UrlManager(object):
     
     def __init__(self):
@@ -8,20 +10,21 @@ class UrlManager(object):
         
         #first check error.txt file content, then generate before error url
         filename = 'files/error.txt'
-        with open(filename, 'r') as f:
-            for data in f:
-                data = data.strip()
-                #print(data)
-                if data.find('-') > -1:
-                    date = data.split('-')
-                    self.urls.append((date[0], date[1], self.base_url.format(month = date[0], day = date[1])))
+        if os.path.exists(filename):
+            with open(filename, 'r') as f:
+                for data in f:
+                    data = data.strip()
+                    #print(data)
+                    if data.find('-') > -1:
+                        date = data.split('-')
+                        self.urls.append((date[0], date[1], self.base_url.format(month = date[0], day = date[1])))
 
-        #truncate file
-        with open(filename, 'w') as f:
-            pass
+            #truncate file
+            with open(filename, 'w') as f:
+                pass
 
-        if len(self.urls) > 0:
-            return
+            if len(self.urls) > 0:
+                return
 
         for m in range(1, 13):
             for d in range(1, 32):

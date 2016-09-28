@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import os
 
 class OutputResultModel(object):
     def __init__(self, year, title):
@@ -42,6 +43,13 @@ class HtmlOutputer(object):
 
     def __init__(self):
         self.datas = []
+        filename = 'files/1.txt'
+        if not os.path.exists(os.path.dirname(filename)):
+            try:
+                os.mkdir(os.path.dirname(filename))
+            except OSError as e:
+                print('crate folder error : %s' % os.path.dirname(filename))
+                exit(0)
 
     def write_file(self, data):
         filename = 'files/{}-{}.json'.format(data[0], data[1])
@@ -53,8 +61,13 @@ class HtmlOutputer(object):
         filename = 'files/error.txt'
         content = '{}-{}'.format(new_url[0], new_url[1])
         print('generate %s file error.' % content)
-        with open(filename, 'a+', encoding = 'utf-8') as f:
-            f.write(content + '\n')
+        #if file not exists , create iter
+        if os.path.exists(filename):
+            with open(filename, 'a+', encoding = 'utf-8') as f:
+                f.write('\n' + content)
+        else:
+            with open(filename, 'w', encoding = 'utf-8') as f:
+                f.write(content)
 
     def collect_data(self, new_url, new_data):
         if new_data is None:

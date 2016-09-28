@@ -23,7 +23,7 @@ class HtmlParser(object):
                     result += e.string
             else:
                 result += e
-        return result.replace('：', ' ')
+        return result.replace('：', ':')
 
     def get_year(self, element):
         for e in element:

@@ -7,4 +7,4 @@
 #接口
 
 或许你对这个项目没有兴趣, 不过你既然来到了这里,我相信下面这个接口是你需要的,哈哈...   我已经把生成的json文件放在一个小机上了,大家轻点用...
-#####[历史上的今天](http://api.lifetime.photo:81/history)
+#####[历史上的今天](http://history.lifetime.photo:81/api/history)

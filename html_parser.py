@@ -77,14 +77,21 @@ class HtmlParser(object):
             #if type(r) is bs4.element.NavigableString:
             #    continue
             tag = soup.find(id = r[2]).parent
-            ul = tag.find_next_sibling('ul')
+            if r[0] == '1':
+                uls = [tag.find_next_sibling('ul')]
+            #birth and dead , multi column
+            elif tag.find_next_sibling().name != 'ul' and not tag.find_next_sibling('table') is None:
+                uls = tag.find_next_sibling('table').find_all('ul')
+            else:
+                uls = [tag.find_next_sibling('ul')]
             ls = []
-            for li in ul:
-                if li.name != 'li':
-                    continue
-                year = self.get_year(li)
-                title = self.get_children_content(li)
-                ls.append([year,title])
+            for ul in uls:
+                for li in ul:
+                    if li.name != 'li':
+                        continue
+                    year = self.get_year(li)
+                    title = self.get_children_content(li)
+                    ls.append([year,title])
 
             key = (r[0], r[1])
             #print(key)
